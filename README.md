@@ -17,7 +17,7 @@ The following environment variables must be set for authentication and configura
 - `ARCHY_CLIENT_ID`: Required when using client-based authentication.
 - `ARCHY_CLIENT_SECRET`: Required when using client-based authentication.
 - `ARCHY_HOME_DIR` (default: `/opt/archy/archyHome`): The home directory for Archy.
-- `ARCHY_LOCATION` (default: `mypurecloud.com`): The location where Archy operates.
+- `ARCHY_REGION` (default: `mypurecloud.com`): The Genesys region where Archy operates.
 - `ARCHY_DEBUG` (default: `false`): Enables debug mode if set to `true`.
 
 ## Usage
