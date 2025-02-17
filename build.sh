@@ -21,18 +21,16 @@ function docker_tag_exists() {
     curl --silent -f -lSL "https://hub.docker.com/v2/repositories/$DOCKER_REPO/tags/$version" > /dev/null
 }
 
-docker buildx create --use || true
-
 for VERSION in $AVAILABLE_VERSIONS; do
     if [[ "$FORCE_BUILD" == false ]] && docker_tag_exists "$VERSION"; then
         echo "🟢 Version $VERSION already exists on Docker Hub. Skipping..."
     else
         echo "🔵 Building version $VERSION..."
-        docker buildx build --platform linux/amd64 --build-arg ARCHY_VERSION="$VERSION" -t "$DOCKER_REPO:$VERSION" -q --push .
+        docker build --platform linux/amd64 --build-arg ARCHY_VERSION="$VERSION" -t "$DOCKER_REPO:$VERSION" -q --push .
         if [ "$VERSION" == "$LATEST_VERSION" ]; then
             echo "🔵 Tagging $LATEST_VERSION as latest..."
             docker tag "$DOCKER_REPO:$VERSION" "$DOCKER_REPO:latest"
-            docker push "$DOCKER_REPO:latest"
+            docker push "$DOCKER_REPO:latest" -q
         fi
     fi
 done
