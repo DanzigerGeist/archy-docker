@@ -36,6 +36,7 @@ docker run --rm -e ARCHY_AUTH_TOKEN="your-auth-token" danzigergeist/archy:2.33.1
 
 ```bash
 docker run --platform linux/amd64 --rm -e ARCHY_AUTH_TOKEN="your-auth-token" danzigergeist/archy:2.33.1 archy --help
+```
 
 ## License
 
