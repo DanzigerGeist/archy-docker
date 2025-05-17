@@ -32,6 +32,11 @@ To use a specific version:
 docker run --rm -e ARCHY_AUTH_TOKEN="your-auth-token" danzigergeist/archy:2.33.1 archy --help
 ```
 
+> **Note**: This Docker image is built for the Linux platform by default. If you are using an M-based Mac (Apple Silicon), you need to specify the `linux/amd64` platform when running the image. For example:
+
+```bash
+docker run --platform linux/amd64 --rm -e ARCHY_AUTH_TOKEN="your-auth-token" danzigergeist/archy:2.33.1 archy --help
+
 ## License
 
 This project is licensed under the MIT License.
