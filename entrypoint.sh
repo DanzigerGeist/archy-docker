@@ -6,7 +6,11 @@ set -e
 : "${ARCHY_REGION:=mypurecloud.com}"
 : "${ARCHY_DEBUG:=false}"
 
-if [[ -z "$ARCHY_AUTH_TOKEN" && ( -z "$ARCHY_CLIENT_ID" || -z "$ARCHY_CLIENT_SECRET" ) ]]; then
+if [[ "$ARCHY_DEBUG" == "true" ]]; then
+    set -x
+fi
+
+if [[ -z "$ARCHY_AUTH_TOKEN" && ( -z "${ARCHY_CLIENT_ID:-}" || -z "${ARCHY_CLIENT_SECRET:-}" ) ]]; then
     echo "❌ ERROR: Either ARCHY_AUTH_TOKEN or (ARCHY_CLIENT_ID and ARCHY_CLIENT_SECRET) must be provided."
     exit 1
 fi
@@ -22,5 +26,6 @@ cat <<EOF > /root/.archy_config
     "authToken": "${ARCHY_AUTH_TOKEN}"
 }
 EOF
+chmod 600 /root/.archy_config
 
 exec "$@"
